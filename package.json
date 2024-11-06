@@ -1,10 +1,11 @@
 {
   "name": "functions",
   "version": "1.0.0",
-  "main": "lib/index.js",
+  "main": "lib/server.js",
+  "type": "module",
   "scripts": {
     "build": "tsc",
-    "start": "node lib/index.js"
+    "start": "node lib/server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

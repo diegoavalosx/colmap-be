@@ -84,6 +84,7 @@ dist/
 build/
 functions/lib/
 functions/dist/
+lib/
 
 # Firebase-related files
 .firebaserc
