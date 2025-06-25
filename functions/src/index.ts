@@ -27,7 +27,10 @@ sendContactApp.use((req, res, next) => {
 sendContactApp.use(express.json());
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.protonmail.ch",
+  port: 587,
+  secure: false,
+  requireTLS: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -35,17 +38,17 @@ const transporter = nodemailer.createTransport({
 });
 
 sendContactApp.post("/", async (req, res) => {
-  const { name, email, message } = req.body;
+  const { name, email, message, phone } = req.body;
 
-  if (!name || !email || !message) {
+  if (!name || !email || !message || !phone) {
     return res.status(400).send("Missing fields");
   }
 
   const mailOptions = {
-    from: `"${name}" <${email}>`,
+    from: "<contact@oohyeahmedia.com>",
     to: "oohyeahmedia@protonmail.com",
     subject: "New Contact Form Submission",
-    text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+    text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`,
   };
 
   try {
